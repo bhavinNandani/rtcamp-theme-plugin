@@ -10,25 +10,17 @@
  */
 
 ?>
+<footer class="site-footer" >
+	<nav class="site-nav" >
+		<?php wp_nav_menu(); ?>	
+	</nav>
+</footer>
 
-	</div><!-- #content -->
-
-	<footer id="colophon" class="site-footer">
-		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'simple-rtcamp' ) ); ?>">
-				<?php
-				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( 'Proudly powered by %s', 'simple-rtcamp' ), 'WordPress' );
-				?>
-			</a>
-			<span class="sep"> | </span>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( 'Theme: %1$s by %2$s.', 'simple-rtcamp' ), 'simple-rtcamp', '<a href="http://underscores.me/">Underscores.me</a>' );
-				?>
-		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
-</div><!-- #page -->
+	<!-- <footer id="colophon" class="site-footer">
+		<p><?php bloginfo('name'); ?> - &copy; <?php echo date('Y'); ?> </p>
+	</footer> -->
+	<!-- #colophon -->
+</div><!-- #container -->
 
 <?php wp_footer(); ?>
 

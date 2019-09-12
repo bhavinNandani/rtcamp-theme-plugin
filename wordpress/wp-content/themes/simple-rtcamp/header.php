@@ -8,7 +8,6 @@
  *
  * @package simple-rtcamp
  */
-
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -16,35 +15,36 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
-
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/flexSlider/flexslider.css" type="text/css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/flexSlider/jquery.flexslider-min.js"></script>
+	<script type="text/javascript">(function($) {
+	    $(window).load(function() {
+	        $('#slider .flexslider').flexslider({
+	               animation: 'slide',
+	                slideshowSpeed: 9000,
+	                animationSpeed: 900,
+	                pauseOnAction: true,
+	                pauseOnHover: true,
+	                controlNav: false,
+	                directionNav: true, 
+	                controlsContainer: ".flexslider",
+	        });
+	    });
+	})(jQuery)</script>
 	<?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
 <div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'simple-rtcamp' ); ?></a>
+	<div id="content" class="container">
+		<header id="masthead" class="site-header">
+			
+			<!-- <h1><a href="<?php echo home_url(); ?>"> <?php bloginfo('name'); ?> </a></h1>
+			<h5><?php bloginfo('description') ?></h5> -->
+			
 
-	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
-			$simple_rtcamp_description = get_bloginfo( 'description', 'display' );
-			if ( $simple_rtcamp_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $simple_rtcamp_description; /* WPCS: xss ok. */ ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
-
-		<nav id="site-navigation" class="main-navigation">
+		<!-- <nav id="site-navigation" class="main-navigation">
 			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'simple-rtcamp' ); ?></button>
 			<?php
 			wp_nav_menu( array(
@@ -52,7 +52,31 @@
 				'menu_id'        => 'primary-menu',
 			) );
 			?>
-		</nav><!-- #site-navigation -->
-	</header><!-- #masthead -->
-
-	<div id="content" class="site-content">
+		</nav> --><!-- #site-navigation -->
+				<div class="row" style="width: auto;">
+					<div class="col-sm-4">
+						<?php the_custom_logo();?>
+					</div>
+					<div class="col-sm-8">
+						<nav class="site-nav" >
+							<?php wp_nav_menu(); ?>
+						</nav>
+					</div>
+				</div>
+			
+		</header><!-- #masthead -->
+		<section id="slider">
+	      <div class="flexslider">
+	        <ul class="slides">
+	        <?php query_posts(array('orderby' => 'rand')); if(have_posts()) : while(have_posts()) : the_post();?>
+	            <li class="slide">
+	            <?php the_title(); ?>
+	            <?php the_excerpt(); ?>
+	            <?php the_post_thumbnail(); ?>
+	          </li>
+	        <?php endwhile; endif; wp_reset_query(); ?>
+	        </ul>
+	    </div>
+	</section>
+	</div>
+	<div id="content" class="container">
